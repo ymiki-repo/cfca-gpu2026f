@@ -4,8 +4,8 @@ CU	:= nvcc
 GPU_ARCH	:= 80
 
 # option(s)
-STD	:= -std=c99
 CUFLAGS	:= -O3 -gencode arch=compute_$(GPU_ARCH),code=sm_$(GPU_ARCH) -Xptxas -v,-warn-spills,-warn-lmem-usage -lineinfo
+CUFLAGS	+= -Xcompiler -fopenmp
 
 # source(s)
 SRC	:= vecadd.cu
