@@ -9,8 +9,8 @@ charset = utf-8
 end_of_line = lf
 insert_final_newline = true
 
-# configuration for C/C++ files
-[*.{c,h,cpp,hpp}]
+# configuration for C/C++ and CUDA files
+[*.{c,h,cpp,hpp,cu}]
 indent_style = space
 indent_size = 2
 

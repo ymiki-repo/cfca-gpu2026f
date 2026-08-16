@@ -5,7 +5,7 @@ CC	:= gcc
 # option(s)
 STD	:= -std=c99
 CFLAGS	:= -Wall -Wextra -Wshadow
-CFLAGS	+= -O3 -ffast-math -fopenmp
+CFLAGS	+= -O3 -ffast-math -lm -fopenmp
 # CFLAGS	+= -O3 -fast -mp -Minfo=accel,opt,mp,stdpar
 # CFLAGS	+= -pg
 

@@ -11,6 +11,12 @@
 #include <stdlib.h>
 #include <time.h>
 
+static inline void vecadd(const int num, const float val, const float* restrict a, const float* restrict b, float* restrict c) {
+  for (int i = 0; i < num; i++) {
+    c[i] = a[i] + val * b[i];
+  }
+}
+
 int main(void) {
   const int num = 1024 * 1024 * 1024;
   const float val = 1.5F;
@@ -31,9 +37,7 @@ int main(void) {
 
   // main computation
   clock_gettime(CLOCK_MONOTONIC, &ini);
-  for (int i = 0; i < num; i++) {
-    c0[i] = a0[i] + val * b0[i];
-  }
+  vecadd(num, val, a0, b0, c0);
   clock_gettime(CLOCK_MONOTONIC, &end);
   const double elapsed = (double)(end.tv_sec - ini.tv_sec) + (double)(end.tv_nsec - ini.tv_nsec) * 1e-9;
   printf("elapsed time: %e [s]\n", elapsed);
