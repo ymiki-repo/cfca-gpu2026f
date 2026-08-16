@@ -18,7 +18,7 @@ static inline void vecadd_omp(const int num, const float val, const float* __res
 }
 
 #define NTHREADS (128)
-#define NBLOCKS(num) (((num) + NTHREADS - 1) / NTHREADS)
+#define NBLOCKS(num, threads) (((num) + (threads) - 1) / (threads))
 
 __global__ void vecadd_gpu(const int num, const float val, const float* __restrict a, const float* __restrict b, float* __restrict c) {
   int i = blockIdx.x * blockDim.x + threadIdx.x;
@@ -56,7 +56,7 @@ int main(void) {
   const double elapsed_cpu = (double)(end.tv_sec - ini.tv_sec) + (double)(end.tv_nsec - ini.tv_nsec) * 1e-9;
   printf("elapsed time (CPU): %e [s]\n", elapsed_cpu);
   clock_gettime(CLOCK_MONOTONIC, &ini);
-  vecadd_gpu<<<NBLOCKS(num), NTHREADS>>>(num, val, a0, b0, c1);
+  vecadd_gpu<<<NBLOCKS(num, NTHREADS), NTHREADS>>>(num, val, a0, b0, c1);
   clock_gettime(CLOCK_MONOTONIC, &end);
   const double elapsed_gpu = (double)(end.tv_sec - ini.tv_sec) + (double)(end.tv_nsec - ini.tv_nsec) * 1e-9;
   printf("elapsed time (GPU): %e [s] (%e times faster)\n", elapsed_gpu, elapsed_cpu / elapsed_gpu);
