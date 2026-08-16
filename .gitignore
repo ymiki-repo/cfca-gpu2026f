@@ -1,0 +1,16 @@
+# miscellaneous files
+*make.log
+*.o
+# executable files
+collapse
+collapse_mpi
+# log files
+*.sqlite
+*.nsys-rep
+*.ncu-rep
+*_nvidia.sh.*
+*_cuda.sh.*
+*_nvmpi.sh.*
+*_ompi-cuda.sh.*
+gmon.out
+slurm-*.out
