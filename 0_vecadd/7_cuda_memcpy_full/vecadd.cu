@@ -10,7 +10,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-static inline void vecadd_omp(const int num, const float val, const float* __restrict a, const float* __restrict b, float* __restrict c) {
+static inline void vecadd_omp(const int num, const float val, const float* __restrict__ a, const float* __restrict__ b, float* __restrict__ c) {
 #pragma omp parallel for
   for (int i = 0; i < num; i++) {
     c[i] = a[i] + val * b[i];
@@ -20,7 +20,7 @@ static inline void vecadd_omp(const int num, const float val, const float* __res
 #define NTHREADS (128)
 #define NBLOCKS(num, threads) (((num) + (threads) - 1) / (threads))
 
-__global__ void vecadd_gpu(const int num, const float val, const float* __restrict a, const float* __restrict b, float* __restrict c) {
+__global__ void vecadd_gpu(const int num, const float val, const float* __restrict__ a, const float* __restrict__ b, float* __restrict__ c) {
   int i = blockIdx.x * blockDim.x + threadIdx.x;
   if (i < num) {
     c[i] = a[i] + val * b[i];
@@ -85,10 +85,10 @@ int main(void) {
   }
 
   // free memory
-  cudaFree(a0);
-  cudaFree(b0);
+  cudaFreeHost(a0);
+  cudaFreeHost(b0);
   free(c0);
-  cudaFree(c1);
+  cudaFreeHost(c1);
   cudaFree(a0_dev);
   cudaFree(b0_dev);
   cudaFree(c1_dev);
