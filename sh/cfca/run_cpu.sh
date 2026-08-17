@@ -2,7 +2,7 @@
 #SBATCH --partition=gpuws
 #SBATCH -N 1
 #SBATCH -n 1
-#SBATCH --cpus-per-task=8
+#SBATCH --cpus-per-task=16
 #SBATCH --time=00:05:00
 
 module purge
