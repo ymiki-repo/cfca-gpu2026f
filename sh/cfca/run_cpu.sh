@@ -5,6 +5,8 @@
 #SBATCH --cpus-per-task=16
 #SBATCH --time=00:05:00
 
+hostname
+
 module purge
 module load nvhpc/25.7
 

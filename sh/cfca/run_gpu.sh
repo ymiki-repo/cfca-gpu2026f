@@ -3,6 +3,8 @@
 #SBATCH --gres=gpu:1
 #SBATCH --time=00:05:00
 
+hostname
+
 module purge
 module load nvhpc/25.7
 

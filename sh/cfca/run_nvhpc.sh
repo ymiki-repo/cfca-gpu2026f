@@ -3,6 +3,8 @@
 #SBATCH --gres=gpu:1
 #SBATCH --time=00:05:00
 
+hostname
+
 if [ -z "${PARAM}" ]; then
 	PARAM="params.ini"
 fi
